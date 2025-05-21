@@ -1,0 +1,61 @@
+group 'com.plugin.record_mp3'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+        maven { url 'https://storage.googleapis.com/download.flutter.io' }
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.4.2'
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+        maven { url 'https://storage.googleapis.com/download.flutter.io' }
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    namespace 'com.plugin.record_mp3'
+
+    compileSdkVersion 33
+
+    defaultConfig {
+        minSdkVersion 16
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+}
+subprojects {
+    afterEvaluate { project ->
+        if (project.plugins.hasPlugin("com.android.application") ||
+            project.plugins.hasPlugin("com.android.library")) {
+            project.android {
+                compileSdkVersion 34
+            }
+        }
+    }
+}
+dependencies {
+    implementation 'com.github.GavinCT:AndroidMP3Recorder:v1.0.4'
+    implementation 'io.flutter:flutter_embedding_debug:1.0.0-3316dd8728419ad3534e3f6112aa6291f587078a'
+    implementation 'io.flutter:armeabi_v7a_debug:1.0.0-3316dd8728419ad3534e3f6112aa6291f587078a'
+    implementation 'io.flutter:arm64_v8a_debug:1.0.0-3316dd8728419ad3534e3f6112aa6291f587078a'
+    implementation 'io.flutter:x86_64_debug:1.0.0-3316dd8728419ad3534e3f6112aa6291f587078a'
+    implementation 'io.flutter:x86_debug:1.0.0-3316dd8728419ad3534e3f6112aa6291f587078a'
+
+//    implementation 'com.czt.mp3recorder:library:1.0.4'
+}
